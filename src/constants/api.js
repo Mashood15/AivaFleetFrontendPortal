@@ -1,4 +1,4 @@
-export const APIBASEURL = "https://nacre-api.azurewebsites.net/api";
+export const APIBASEURL = "https://aivafleet-api-g3drfwe6fyb8auh7.canadacentral-01.azurewebsites.net/api";
 
 export const apiUrls = {
   //Auth Urls
@@ -18,6 +18,11 @@ export const apiUrls = {
   getUsers: "/Account/GetUsers",
   createUpdateUser: "/Account/CreateUpdateUser",
   deleteUser: "/Account/DeleteUser",
+  //Driver Urls
+  getDrivers: "/Driver/GetDrivers",
+  createUpdateDriver: "/Driver/CreateUpdateDriver",
+  deleteDriver: "/Driver/DeleteDriver",
+  getDriver: "/Driver/GetDriver",
   //Project Urls
   getProjects: "/Project/GetProjects",
   createUpdateProject: "/Project/CreateUpdateProject",

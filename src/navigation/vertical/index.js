@@ -3,53 +3,58 @@ const navigation = () => {
     {
       title: 'Users',
       icon: 'tabler:user',
-      path: '/nacre/users'
+      path: '/aiva/users'
     },
     {
-      title: 'Projects',
-      icon: 'ant-design:fund-projection-screen-outlined',
-      path: '/nacre/projects'
+      title: 'Drivers',
+      icon: 'tabler:user',
+      path: '/aiva/drivers'
     },
-    {
-      title: 'Inventory',
-      icon: 'material-symbols:inventory-2-outline-rounded',
-      children: [
-        {
-          title: 'Project Block',
-          path: '/nacre/project-blocks'
-        },
-        {
-          title: 'Item Type',
-          path: '/nacre/project-item-type'
-        },
-        {
-          title: 'Item Category',
-          path: '/nacre/project-item-category'
-        },
-        {
-          title: 'Item Size',
-          path: '/nacre/project-item-size'
-        },
-        {
-          title: 'Project Street',
-          path: '/nacre/project-street'
-        },
-        {
-          title: 'Project Item',
-          path: '/nacre/project-item'
-        }
-      ]
-    },
-    {
-      title: 'Leads',
-      icon: 'material-symbols:leaderboard-outline-rounded',
-      path: '/nacre/leads'
-    },
-    {
-      title: 'My Leads',
-      icon: 'ph:user-list-duotone',
-      path: '/nacre/my-leads'
-    }
+    // {
+    //   title: 'Projects',
+    //   icon: 'ant-design:fund-projection-screen-outlined',
+    //   path: '/nacre/projects'
+    // },
+    // {
+    //   title: 'Inventory',
+    //   icon: 'material-symbols:inventory-2-outline-rounded',
+    //   children: [
+    //     {
+    //       title: 'Project Block',
+    //       path: '/nacre/project-blocks'
+    //     },
+    //     {
+    //       title: 'Item Type',
+    //       path: '/nacre/project-item-type'
+    //     },
+    //     {
+    //       title: 'Item Category',
+    //       path: '/nacre/project-item-category'
+    //     },
+    //     {
+    //       title: 'Item Size',
+    //       path: '/nacre/project-item-size'
+    //     },
+    //     {
+    //       title: 'Project Street',
+    //       path: '/nacre/project-street'
+    //     },
+    //     {
+    //       title: 'Project Item',
+    //       path: '/nacre/project-item'
+    //     }
+    //   ]
+    // },
+    // {
+    //   title: 'Leads',
+    //   icon: 'material-symbols:leaderboard-outline-rounded',
+    //   path: '/nacre/leads'
+    // },
+    // {
+    //   title: 'My Leads',
+    //   icon: 'ph:user-list-duotone',
+    //   path: '/nacre/my-leads'
+    // }
   ]
 }
 

@@ -121,5 +121,5 @@ export async function deleteRequestByUrl(url) {
 }
 
 export async function deleteRequestById(url, id) {
-  return await axiosInstance.delete(APIBASEURL + url + id)
+  return await axiosInstance.delete(APIBASEURL + url + "?id=" + id)
 }

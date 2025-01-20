@@ -53,8 +53,9 @@ import { allEnums } from 'src/constants/enums'
 // ** Icons Imports
 import { Icon } from '@iconify/react'
 import { IoReload } from 'react-icons/io5'
-import AddUserDrawer from './components/AddUserDrawer'
+import AddDriverDrawer from './components/AddDriverDrawer'
 import toast from 'react-hot-toast'
+import { driverService } from 'src/services/driverService'
 
 const renderClient = row => {
   return (
@@ -68,7 +69,7 @@ const renderClient = row => {
   )
 }
 
-const UserList = () => {
+const DriverList = () => {
   const [role, setRole] = useState('')
   const [status, setStatus] = useState('')
   const [searchText, setSearchText] = useState('')
@@ -76,8 +77,8 @@ const UserList = () => {
   const [loading, setLoading] = useState(false)
   const [apiData, setApiData] = useState([])
   const [extraPayload, setExtraPayload] = useState('')
-  const [addUserDrawer, setAddUserDrawer] = useState(false)
-  const [oneUser, setOneUser] = useState(null)
+  const [addDriverDrawer, setAddDriverDrawer] = useState(false)
+  const [oneDriver, setOneDriver] = useState(null)
   const [anchorEl, setAnchorEl] = useState(null)
   const queryClient = useQueryClient()
   const [roleOptions, setRoleOptions] = useState([])
@@ -94,35 +95,13 @@ const UserList = () => {
     setAnchorEl(null)
   }
 
-  //Api call to get roles
-  const { isFetching: gettingRoles } = roleService.getRoles('get-roles', '', '', false, 1, 100, true, {
-    onSuccess: response => {
-      if (response.data.isSuccess) {
-        const temp = []
-        response.data.result.items.map(one => {
-          const element = {
-            label: one.name,
-            value: one.id
-          }
-          temp.push(element)
-        })
-        setRoleOptions(temp)
-      } else {
-        setRoleOptions([])
-      }
-    },
-    onError: error => {
-      setRoleOptions([])
-    }
-  })
-
   //Api call to delete a user
-  const { mutate: deleteUser, isLoading: deletingUser } = userService.deleteUser({
+  const { mutate: deleteDriver, isLoading: deletingDriver } = driverService.deleteDriver({
     onSuccess: response => {
       if (response.data.isSuccess) {
         toast.success(response.data.message)
         setCurrentDelId(null)
-        queryClient.invalidateQueries('get-users')
+        queryClient.invalidateQueries('get-drivers')
       } else {
         toast.error(response.data.message)
         setCurrentDelId(null)
@@ -134,28 +113,10 @@ const UserList = () => {
     }
   })
 
-  //API requests
-  const { mutate: forgotPassword, isLoading } = authService.forgotPassword({
-    onSuccess: response => {
-      if (response.data.isSuccess == true) {
-        toast.success(response.data.message)
-        setCurrentDelId(null)
-        queryClient.invalidateQueries('get-users')
-      } else {
-        toast.error(response.data.message)
-        setCurrentDelId(null)
-      }
-    },
-    onError: error => {
-      toast.error(error.message)
-      setCurrentDelId(null)
-    }
-  })
-
-  const delUser = id => {
+  const delDriver = id => {
     Swal.fire({
       icon: 'warning',
-      text: `Are you sure you want to delete this user?`,
+      text: `Are you sure you want to delete this driver?`,
       showCancelButton: true,
       showConfirmButton: true,
       cancelButtonColor: '#ea5455',
@@ -163,23 +124,7 @@ const UserList = () => {
     }).then(result => {
       if (result.isConfirmed) {
         const payload = { id: id }
-        deleteUser(payload)
-      }
-    })
-  }
-
-  const resendEmailFunc = email => {
-    Swal.fire({
-      icon: 'info',
-      title: 'Resend Email Invite?',
-      text: 'Are you sure you want to resend email to this user? This will automatically send a new invitation email to the user to activate their account',
-      showConfirmButton: true,
-      showCancelButton: true,
-      cancelButtonColor: '#ea5455',
-      confirmButtonColor: '#4e766e'
-    }).then(result => {
-      if (result.isConfirmed) {
-        forgotPassword({ email })
+        deleteDriver(payload)
       }
     })
   }
@@ -188,10 +133,9 @@ const UserList = () => {
     {
       flex: 0.25,
       minWidth: 280,
-      field: 'fullName',
-      headerName: 'User',
+      headerName: 'Name',
       renderCell: ({ row }) => {
-        const { name, email } = row
+        const { firstName, lastName, email } = row
         return (
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             {renderClient(row)}
@@ -207,7 +151,7 @@ const UserList = () => {
                   '&:hover': { color: 'primary.main' }
                 }}
               >
-                {name}
+                {firstName + " " + lastName}
               </Typography>
               <Typography noWrap variant='body2' sx={{ color: 'text.disabled' }}>
                 {email}
@@ -219,19 +163,29 @@ const UserList = () => {
     },
     {
       flex: 0.15,
-      field: 'role',
+      field: 'phoneNumber',
       minWidth: 170,
-      headerName: 'Role',
+      headerName: 'Phone Number',
       renderCell: ({ row }) => {
         return (
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-            <Icon
-              fontSize={25}
-              color={allEnums.UserRoleObj[row.roleId]?.color}
-              icon={allEnums.UserRoleObj[row.roleId]?.icon || 'eos-icons:role-binding-outlined'}
-            />
             <Typography noWrap sx={{ color: 'text.secondary', textTransform: 'capitalize' }}>
-              {row.role}
+              {row.phoneNumber}
+            </Typography>
+          </Box>
+        )
+      }
+    },
+    {
+      flex: 0.15,
+      field: 'licenseNumber',
+      minWidth: 170,
+      headerName: 'License Number',
+      renderCell: ({ row }) => {
+        return (
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <Typography noWrap sx={{ color: 'text.secondary', textTransform: 'capitalize' }}>
+              {row.licenseNumber}
             </Typography>
           </Box>
         )
@@ -268,20 +222,16 @@ const UserList = () => {
             <IconButton
               size='small'
               onClick={() => {
-                delUser(row.id)
+                setCurrentDelId(row.id)
+                delDriver(row.id)
               }}
-              disabled={isLoading || deletingUser}
+              disabled={deletingDriver}
             >
-              {currentDelId == row.id && deletingUser ? (
+              {currentDelId == row.id && deletingDriver ? (
                 <CircularProgress size={25} />
               ) : (
                 <Icon icon='tabler:trash' fontSize={20} />
               )}
-            </IconButton>
-
-            {/* View Button */}
-            <IconButton size='small' onClick={() => handleView(row.id)}>
-              <Icon icon='tabler:eye' fontSize={20} />
             </IconButton>
 
             {/* Three Dot Menu */}
@@ -298,27 +248,10 @@ const UserList = () => {
               PaperProps={{ style: { minWidth: '8rem' } }}
             >
               <MenuItem
-                disabled={isLoading || deletingUser}
-                sx={{ '& svg': { mr: 2 } }}
+                disabled={deletingDriver}
                 onClick={() => {
-                  resendEmailFunc(row.email)
-                  handleRowOptionsClose()
-                }}
-              >
-                {currentDelId == row.id && isLoading ? (
-                  <CircularProgress size={25} />
-                ) : (
-                  <>
-                    <Icon icon='mdi:reload' fontSize={20} />
-                    Resend Email
-                  </>
-                )}
-              </MenuItem>
-              <MenuItem
-                disabled={isLoading || deletingUser}
-                onClick={() => {
-                  setOneUser(row.id)
-                  setAddUserDrawer(true)
+                  setOneDriver(row.id)
+                  setAddDriverDrawer(true)
                   handleRowOptionsClose()
                 }}
                 sx={{ '& svg': { mr: 2 } }}
@@ -337,12 +270,11 @@ const UserList = () => {
     if (apiData?.length > 0) {
       const tempArray = apiData.map(one => ({
         id: one.id,
-        name: one.name,
-        role: one.role || '',
-        roleId: one.roleId,
-        isActive: one.isActive || '',
+        firstName: one.firstName,
+        lastName: one.lastName,
         email: one.email,
-        emailConfirmed: one.emailConfirmed
+        licenseNumber: one.licenseNumber,
+        isActive: one.isActive
       }))
       setTableData(tempArray)
     } else {
@@ -352,28 +284,17 @@ const UserList = () => {
 
   useEffect(() => {
     const queryParams = []
-    if (role !== '') queryParams.push(`&Role=${role}`)
     if (status !== '') queryParams.push(`&Status=${status}`)
     setExtraPayload(queryParams.join(''))
-  }, [role, status])
+  }, [status])
 
   return (
     <Grid container spacing={6.5}>
       <Grid item xs={12}>
         <Card>
-          <CardHeader title='Users' />
+          <CardHeader title='Drivers' />
           <CardContent>
             <Grid container spacing={6}>
-              <Grid item sm={4} xs={12}>
-                <SimpleSelect
-                  label='Select Role'
-                  placeholder='Select Role'
-                  options={roleOptions}
-                  value={role}
-                  onChange={obj => setRole(obj.value)}
-                  loading={gettingRoles}
-                />
-              </Grid>
               <Grid item sm={4} xs={12}>
                 <SimpleSelect
                   label='Select Status'
@@ -411,7 +332,7 @@ const UserList = () => {
               <CustomTextField
                 value={searchText}
                 sx={{ mr: 4 }}
-                placeholder='Search User'
+                placeholder='Search Driver'
                 onChange={e => setSearchText(e.target.value)}
               />
 
@@ -420,14 +341,14 @@ const UserList = () => {
               </Button>
               <Button
                 onClick={() => {
-                  setOneUser(null)
-                  setAddUserDrawer(true)
+                  setOneDriver(null)
+                  setAddDriverDrawer(true)
                 }}
                 variant='contained'
                 sx={{ '& svg': { mr: 2 } }}
               >
                 <Icon fontSize='1.125rem' icon='tabler:plus' />
-                Add New User
+                Add New Driver
               </Button>
             </Box>
           </Box>
@@ -436,12 +357,12 @@ const UserList = () => {
             loading={loading}
             columns={columns}
             border={false}
-            url={apiUrls.getUsers}
+            url={apiUrls.getDrivers}
             filters={[]}
             items={apiData}
             setItems={setApiData}
             setLoading={setLoading}
-            queryKey='get-users'
+            queryKey='get-drivers'
             isEnable
             searchText={searchText}
             extraPayload={extraPayload}
@@ -451,11 +372,11 @@ const UserList = () => {
         </Card>
       </Grid>
 
-      {addUserDrawer && (
-        <AddUserDrawer open={addUserDrawer} statechanger={setAddUserDrawer} oneUser={oneUser} setOneUser={setOneUser} />
+      {addDriverDrawer && (
+        <AddDriverDrawer open={addDriverDrawer} statechanger={setAddDriverDrawer} oneDriver={oneDriver} setOneDriver={setOneDriver} />
       )}
     </Grid>
   )
 }
 
-export default UserList
+export default DriverList
