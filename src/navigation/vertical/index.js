@@ -10,6 +10,11 @@ const navigation = () => {
       icon: 'tabler:user',
       path: '/aiva/drivers'
     },
+    {
+      title: 'FOB',
+      icon: 'tabler:user',
+      path: '/aiva/fobs'
+    },
     // {
     //   title: 'Projects',
     //   icon: 'ant-design:fund-projection-screen-outlined',

@@ -23,57 +23,11 @@ export const apiUrls = {
   createUpdateDriver: "/Driver/CreateUpdateDriver",
   deleteDriver: "/Driver/DeleteDriver",
   getDriver: "/Driver/GetDriver",
-  //Project Urls
-  getProjects: "/Project/GetProjects",
-  createUpdateProject: "/Project/CreateUpdateProject",
-  deleteProject: "/Project/DeleteProject",
-  //Project Block Urls
-  getProjectBlocks: "/ProjectBlock/GetProjectBlocks",
-  createUpdateProjectBlock: "/ProjectBlock/CreateUpdateProjectBlock",
-  deleteProjectBlock: "/ProjectBlock/DeleteProjectBlock",
-  // Item Category URLs
-  getItemCategories: "/ProjectItemCategory/GetProjectItemCategories",
-  createUpdateItemCategory:
-    "/ProjectItemCategory/CreateUpdateProjectItemCategory",
-  deleteItemCategory: "/ProjectItemCategory/DeleteProjectItemCategory",
-  // Item Size URLs
-  getItemSizes: "/ProjectItemSize/GetProjectItemSizes",
-  createUpdateItemSize: "/ProjectItemSize/CreateUpdateProjectItemSize",
-  deleteItemSize: "/ProjectItemSize/DeleteProjectItemSize",
-  //Project Item Type Urls
-  getProjectItemTypes: "/ProjectItemType/GetProjectItemTypes",
-  createUpdateProjectItemType: "/ProjectItemType/CreateUpdateProjectItemType",
-  deleteProjectItemType: "/ProjectItemType/DeleteProjectItemType",
-  // Project Street URLs
-  getProjectStreets: "/ProjectStreet/GetProjectStreets",
-  createUpdateProjectStreet: "/ProjectStreet/CreateUpdateProjectStreet",
-  deleteProjectStreet: "/ProjectStreet/DeleteProjectStreet",
-  // Project Item URLs
-  getProjectItems: "/ProjectItem/GetProjectItems",
-  createUpdateProjectItem: "/ProjectItem/CreateUpdateProjectItem",
-  deleteProjectItem: "/ProjectItem/DeleteProjectItem",
-  //Lookup Urls
-  getProjectTypesLookup: "/Lookup/GetProjectTypes",
-  getGenders: "/Lookup/GetGenders",
-  getProjectsLookup: "/Lookup/GetProjects",
-  getProjectItemSizeUnits: "/Lookup/GetProjectItemSizeUnits",
-  getProjectBlocksLookup: "/Lookup/GetProjectBlocks",
-  getProjectStreetsLookup: "/Lookup/GetProjectStreets",
-  getProjectItemTypesLookup: "/Lookup/GetProjectItemTypes",
-  getProjectItemCategoriesLookup: "/Lookup/GetProjectItemCategories",
-  getProjectItemStatusesLookup: "/Lookup/GetProjectItemStatuses",
-  getProjectItemAttributesLookup: "/Lookup/GetProjectItemAttributes",
-  getLeadPlatformsLookup: "/Lookup/GetLeadPlatforms",
-  getLeadStatusesLookup: "/Lookup/GetLeadStatuses",
-  getSaleAgentsLookup: "/Lookup/GetSaleAgents",
-  getFollowupStatuses: "/Lookup/getFollowUpStatuses",
-  // Lead URLs
-  getLeads: "/Lead/GetLeads",
-  createUpdateLead: "/Lead/CreateUpdateLead",
-  deleteLead: "/Lead/DeleteLead",
-  assignLeadToUser: "/Lead/AssignLeadToUser",
-  // Follow Up URLs
-  getLeadFollowUps: "/FollowUp/getLeadFollowUps",
-  createUpdateFollowUp: "/FollowUp/CreateUpdateFollowUp",
-  deleteFollowUp: "/FollowUp/DeleteFollowUp",
+  //Fob Urls
+  getFOBs: "/FOB/GetFOBs",
+  createUpdateFOB: "/FOB/CreateUpdateFOB",
+  deleteFOB: "/FOB/DeleteFOB",
+  getFOB: "/FOB/GetFOB",
+  //Fob Urls
+  getVehicles: "/Vehicle/GetVehicles",
 };
