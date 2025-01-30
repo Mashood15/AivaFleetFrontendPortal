@@ -30,10 +30,10 @@ export const vehicleService = {
         }
       );
     },
-    getFob: (key, id, options) => {
+    getVehicle: (key, id, options) => {
       return useQuery(
         [key, id],
-        () => getRequest(apiUrls.getFOB + `?id=${id}`),
+        () => getRequest(apiUrls.getVehicle + `?id=${id}`),
         {
           ...options,
           retry: false,
@@ -41,17 +41,17 @@ export const vehicleService = {
         }
       );
     },
-    createUpdateFob: (options) => {
+    createUpdateVehicle: (options) => {
       return useMutation(
-        (payload) => postRequest(apiUrls.createUpdateFOB, payload),
+        (payload) => postRequest(apiUrls.createUpdateVehicle, payload),
         {
           ...options,
         }
       );
     },
-    deleteFob: (options) => {
+    deleteVehicle: (options) => {
       return useMutation(
-        (payload) => deleteRequestById(apiUrls.deleteFOB, payload.id),
+        (payload) => deleteRequestById(apiUrls.deleteVehicle, payload.id),
         {
           ...options,
         }
