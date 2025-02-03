@@ -33,4 +33,11 @@ export const apiUrls = {
   createUpdateVehicle: "/Vehicle/CreateUpdateVehicle",
   deleteVehicle: "/Vehicle/DeleteVehicle",
   getVehicle: "/Vehicle/GetVehicle",
+  //Route Urls
+  getRoutes: "/Route/GetRoutes",
+  createUpdateRoute: "/Route/CreateUpdateRoute",
+  deleteRoute: "/Route/DeleteRoute",
+  getRouteDetails: "/Route/GetRouteDetails",
 };
+
+
