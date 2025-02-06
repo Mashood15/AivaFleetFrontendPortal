@@ -34,21 +34,21 @@ const DefaultPalette = (mode, skin) => {
       white: whiteColor
     },
     primary: {
-      light: '#8479F2',
-      main: '#7367F0',
-      dark: '#655BD3',
+      light: '#A0D1D2', // Soft Cyan from ColorHunt
+      main: '#9ACBD0', // Muted Cyan (Primary from ColorHunt)
+      dark: '#76B5B8', // Darker muted cyan
       contrastText: whiteColor
     },
     secondary: {
-      light: '#B2B4B8',
-      main: '#A8AAAE',
-      dark: '#949699',
+      light: '#58B2B3', // Soft Teal
+      main: '#48A6A7', // Deep Teal-Green (Secondary from ColorHunt)
+      dark: '#3D8E90',
       contrastText: whiteColor
     },
     error: {
-      light: '#ED6F70',
-      main: '#EA5455',
-      dark: '#CE4A4B',
+      light: '#F4A8A8',
+      main: '#D96B6B', // Muted Red from ColorHunt
+      dark: '#A54A4A',
       contrastText: whiteColor
     },
     warning: {
@@ -86,9 +86,9 @@ const DefaultPalette = (mode, skin) => {
       A700: '#616161'
     },
     text: {
-      primary: `rgba(${mainColor}, 0.78)`,
-      secondary: `rgba(${mainColor}, 0.68)`,
-      disabled: `rgba(${mainColor}, 0.42)`
+      primary: mode === 'light' ? '#1E2A38' : '#E3E9EF', // Dark text for light mode, soft white for dark mode
+      secondary: mode === 'light' ? '#3A5166' : '#A8BACD',
+      disabled: mode === 'light' ? '#7A8B99' : '#6E7D8A'
     },
     divider: `rgba(${mainColor}, 0.16)`,
     background: {

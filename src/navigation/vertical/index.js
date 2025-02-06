@@ -1,30 +1,24 @@
 const navigation = () => {
   return [
     {
-      title: 'Users',
-      icon: 'tabler:user',
-      path: '/aiva/users'
-    },
-    {
       title: 'Drivers',
-      icon: 'tabler:user',
-      path: '/aiva/drivers'
+      icon: 'tabler:car',
+      path: '/aiva/drivers',
     },
     {
       title: 'FOB',
-      icon: 'tabler:user',
-      path: '/aiva/fobs'
+      icon: 'tabler:key',
+      path: '/aiva/fobs',
     },
     {
       title: 'Vehicles',
-      icon: 'tabler:user',
-      path: '/aiva/vehicles'
+      icon: 'tabler:car',
+      path: '/aiva/vehicles',
     },
-
     {
       title: 'Routes',
-      icon: 'tabler:user',
-      path: '/aiva/Routes'
+      icon: 'tabler:route',
+      path: '/aiva/routes',
     },
     // {
     //   title: 'Projects',

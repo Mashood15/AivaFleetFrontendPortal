@@ -6,7 +6,9 @@
  */
 const themeConfig = {
   // ** Layout Configs
-  templateName: 'Nacre' /* App Name */,
+  templateName: 'Aiva Fleet' /* App Name */,
+  mainLogoPath: "/images/logos/Aiva Logo.png",
+  landscapeLogoPathL : "/images/logos/Aiva Logo 2.png",
   layout: 'vertical' /* vertical | horizontal */,
   mode: 'light' /* light | dark | semi-dark /*! Note: semi-dark value will only work for Vertical Layout */,
   direction: 'ltr' /* ltr | rtl */,

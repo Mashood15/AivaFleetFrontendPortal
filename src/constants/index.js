@@ -6,5 +6,5 @@ export const siteInfo = {
   siteShortName: 'Nacre',
   LogoLandscape: LogoLandscape,
   IconSquare: IconSquare,
-  defaultRoute: '/nacre/users'
+  defaultRoute: '/aiva/drivers'
 }
