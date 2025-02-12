@@ -51,6 +51,7 @@ import { Icon } from '@iconify/react'
 import { IoReload } from 'react-icons/io5'
 import AddFobDrawer from './components/AddFobDrawer'
 import toast from 'react-hot-toast'
+import AssignFobToVehicleDialog from './components/AssignFobToVehicle'
 
 const renderClient = row => {
   return (
@@ -79,6 +80,7 @@ const FobList = () => {
   const { t } = useTranslation()
   const rowOptionsOpen = Boolean(anchorEl)
   const [pageSize, setPageSize] = useState(10)
+  const [assignFobToVehicle, setAssignFobToVehicle] = useState(false)
 
   const handleRowOptionsClick = event => {
     setAnchorEl(event.currentTarget)
@@ -90,6 +92,24 @@ const FobList = () => {
 
   // Api call to delete a FOB
   const { mutate: deleteFob, isLoading: deletingFob } = fobService.deleteFob({
+    onSuccess: response => {
+      if (response.data.isSuccess) {
+        toast.success(response.data.message)
+        setCurrentDelId(null)
+        queryClient.invalidateQueries('get-fobs')
+      } else {
+        toast.error(response.data.message)
+        setCurrentDelId(null)
+      }
+    },
+    onError: error => {
+      toast.error(error.message)
+      setCurrentDelId(null)
+    }
+  })
+
+  // Api call to un assign a fob
+  const { mutate: unAssignFob, isLoading: unassigning } = fobService.unAssignFob({
     onSuccess: response => {
       if (response.data.isSuccess) {
         toast.success(response.data.message)
@@ -237,6 +257,42 @@ const FobList = () => {
                 <Icon icon='tabler:edit' fontSize={20} />
                 Edit
               </MenuItem>
+              <MenuItem
+                disabled={deletingFob}
+                onClick={() => {
+                  setOneFob(row.id)
+                  setAssignFobToVehicle(true)
+                  handleRowOptionsClose()
+                }}
+                sx={{ '& svg': { mr: 2 } }}
+              >
+                <Icon icon='tabler:plus' fontSize={20} />
+                Assign Fob To Vehicle
+              </MenuItem>
+              <MenuItem
+                disabled={deletingFob}
+                onClick={() => {
+                  setCurrentDelId(row.id)
+                  const payload = {
+                    fodId: row.id
+                  }
+                  unAssignFob(payload)
+                  handleRowOptionsClose()
+                }}
+                sx={{ '& svg': { mr: 2 } }}
+              >
+                {
+                  currentDelId == row.id && unassigning ?
+                  <CircularProgress size={25} />
+                  :
+                  <>
+                  <Icon icon='tabler:minus' fontSize={20} />
+                  Remove Fob From Vehicle
+                  </>
+                }
+               
+                
+              </MenuItem>
             </Menu>
           </>
         )
@@ -351,6 +407,9 @@ const FobList = () => {
 
       {addFobDrawer && (
         <AddFobDrawer open={addFobDrawer} statechanger={setAddFobDrawer} oneFob={oneFob} setOneFob={setOneFob} />
+      )}
+      {assignFobToVehicle && (
+        <AssignFobToVehicleDialog open={assignFobToVehicle} statechanger={setAssignFobToVehicle} oneFob={oneFob} setOneFob={setOneFob} />
       )}
     </Grid>
   )

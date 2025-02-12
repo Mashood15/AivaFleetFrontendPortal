@@ -29,6 +29,7 @@ const CustomCloseButton = styled(IconButton)(({ theme }) => ({
   }
 }))
 
+
 const DialogCustomized = () => {
   // ** State
   const [open, setOpen] = useState(false)

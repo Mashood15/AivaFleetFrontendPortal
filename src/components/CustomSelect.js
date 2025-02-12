@@ -160,6 +160,7 @@ const CustomSelect = forwardRef((props, ref) => {
     disabled = false,
     showValid = true,
     customOnChange,
+    helperText,
     ...rest
   } = props
   const formik = useContext(FormikContext)
@@ -199,6 +200,7 @@ const CustomSelect = forwardRef((props, ref) => {
           ...InputLabelProps,
           shrink: true
         }}
+        helperText={helperText}
         SelectProps={{
           value: formik.values[name],
           renderValue: selected => {

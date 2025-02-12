@@ -49,6 +49,22 @@ export const fobService = {
         }
       );
     },
+    assignFobToVehicle: (options) => {
+      return useMutation(
+        (payload) => postRequest(apiUrls.assignFobToVehicle, payload),
+        {
+          ...options,
+        }
+      );
+    },
+    unAssignFob: (options) => {
+      return useMutation(
+        (payload) => postRequest(apiUrls.unAssignFob + `?fobid=${payload.fodId}`, {}),
+        {
+          ...options,
+        }
+      );
+    },
     deleteFob: (options) => {
       return useMutation(
         (payload) => deleteRequestById(apiUrls.deleteFOB, payload.id),

@@ -28,6 +28,8 @@ export const apiUrls = {
   createUpdateFOB: "/FOB/CreateUpdateFOB",
   deleteFOB: "/FOB/DeleteFOB",
   getFOB: "/FOB/GetFOB",
+  assignFobToVehicle: "/FOB/AssignFOBToVehicle",
+  unAssignFob: "/FOB/UnassignFOB",
   //Fob Urls
   getVehicles: "/Vehicle/GetVehicles",
   createUpdateVehicle: "/Vehicle/CreateUpdateVehicle",
