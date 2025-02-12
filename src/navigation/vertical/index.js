@@ -20,6 +20,11 @@ const navigation = () => {
       icon: 'tabler:route',
       path: '/aiva/routes',
     },
+    {
+      title: 'Trips',
+      icon: 'tabler:caravan', // Assign the 'tabler:caravan' icon
+      path: '/aiva/trips',
+    },
     // {
     //   title: 'Projects',
     //   icon: 'ant-design:fund-projection-screen-outlined',

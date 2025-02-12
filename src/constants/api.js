@@ -38,6 +38,11 @@ export const apiUrls = {
   createUpdateRoute: "/Route/CreateUpdateRoute",
   deleteRoute: "/Route/DeleteRoute",
   getRouteDetails: "/Route/GetRouteDetails",
+  //Trip Urls
+  getTrips: "/Trip/GetTrips",
+  createUpdateTrip: "/Trip/CreateUpdateTrip",
+  deleteTrip: "/Trip/DeleteTrip",
+  getTripDetails: "/Trip/GetTripDetails",
 };
 
 
