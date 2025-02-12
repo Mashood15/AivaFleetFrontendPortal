@@ -193,14 +193,13 @@ const CustomSelect = forwardRef((props, ref) => {
         variant='filled'
         {...(showValid && {
           error: Boolean(formik.errors[name] && formik.touched[name]),
-          helperText: formik.errors[name] && formik.touched[name] ? formik.errors[name] : null
+          helperText: formik.errors[name] && formik.touched[name] ? formik.errors[name] : helperText && helperText != "" ? helperText : ""
         })}
         disabled={disabled || formik.isLoading}
         InputLabelProps={{
           ...InputLabelProps,
           shrink: true
         }}
-        helperText={helperText}
         SelectProps={{
           value: formik.values[name],
           renderValue: selected => {

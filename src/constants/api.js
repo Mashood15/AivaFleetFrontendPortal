@@ -30,11 +30,14 @@ export const apiUrls = {
   getFOB: "/FOB/GetFOB",
   assignFobToVehicle: "/FOB/AssignFOBToVehicle",
   unAssignFob: "/FOB/UnassignFOB",
-  //Fob Urls
+  //Vehicle Urls
   getVehicles: "/Vehicle/GetVehicles",
   createUpdateVehicle: "/Vehicle/CreateUpdateVehicle",
+  assignDriverToVehicle: "/Vehicle/AssignDriver",
   deleteVehicle: "/Vehicle/DeleteVehicle",
-  getVehicle: "/Vehicle/GetVehicle",
+  getVehicle: "/Vehicle/GetVehicleDetails",
+  getVehicleDrivers: "/Vehicle/GetVehicleDrivers",
+  unAssignDriver: "/Vehicle/UnassignDriver",
   //Route Urls
   getRoutes: "/Route/GetRoutes",
   createUpdateRoute: "/Route/CreateUpdateRoute",

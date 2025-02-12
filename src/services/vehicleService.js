@@ -41,9 +41,36 @@ export const vehicleService = {
         }
       );
     },
+    getVehicleDrivers: (key, vehicleId, options) => {
+      return useQuery(
+        [key, vehicleId],
+        () => getRequest(apiUrls.getVehicleDrivers + `?vehicleId=${vehicleId}`),
+        {
+          ...options,
+          retry: false,
+          refetchOnWindowFocus: false,
+        }
+      );
+    },
     createUpdateVehicle: (options) => {
       return useMutation(
         (payload) => postRequest(apiUrls.createUpdateVehicle, payload),
+        {
+          ...options,
+        }
+      );
+    },
+    assignDriverToVehicle: (options) => {
+      return useMutation(
+        (payload) => postRequest(apiUrls.assignDriverToVehicle, payload),
+        {
+          ...options,
+        }
+      );
+    },
+    unAssignDriver: (options) => {
+      return useMutation(
+        (payload) => postRequest(apiUrls.unAssignDriver, payload),
         {
           ...options,
         }

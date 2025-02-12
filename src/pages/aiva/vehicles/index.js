@@ -51,6 +51,8 @@ import { Icon } from '@iconify/react'
 import { IoReload } from 'react-icons/io5'
 import AddVehicleDrawer from './components/AddVehicleDrawer'
 import toast from 'react-hot-toast'
+import AssignDriverToVehicleDialog from './components/AssignDriverToVehicle'
+import UnassignDriverFromVehicleDialog from './components/UnassignDriverFromVehicle'
 
 const renderClient = row => {
   return (
@@ -79,6 +81,8 @@ const VehicleList = () => {
   const { t } = useTranslation()
   const rowOptionsOpen = Boolean(anchorEl)
   const [pageSize, setPageSize] = useState(10)
+  const [assignDriverToVehicle, setAssignDriverToVehicle] = useState(false)
+  const [unAssignDriverFromVehicle, setUnAssignDriverFromVehicle] = useState(false)
 
   const handleRowOptionsClick = event => {
     setAnchorEl(event.currentTarget)
@@ -252,6 +256,30 @@ const VehicleList = () => {
                 <Icon icon='tabler:edit' fontSize={20} />
                 Edit
               </MenuItem>
+              <MenuItem
+                disabled={deletingVehicle}
+                onClick={() => {
+                  setOneVehicle(row.id)
+                  setAssignDriverToVehicle(true)
+                  handleRowOptionsClose()
+                }}
+                sx={{ '& svg': { mr: 2 } }}
+              >
+                <Icon icon='tabler:plus' fontSize={20} />
+                Assign Driver To Vehicle
+              </MenuItem>
+              <MenuItem
+                disabled={deletingVehicle}
+                onClick={() => {
+                  setOneVehicle(row.id)
+                  setUnAssignDriverFromVehicle(true)
+                  handleRowOptionsClose()
+                }}
+                sx={{ '& svg': { mr: 2 } }}
+              >
+                <Icon icon='tabler:minus' fontSize={20} />
+                Unassign Driver From Vehicle
+              </MenuItem>
             </Menu>
           </>
         )
@@ -368,6 +396,14 @@ const VehicleList = () => {
 
       {addVehicleDrawer && (
         <AddVehicleDrawer open={addVehicleDrawer} statechanger={setAddVehicleDrawer} oneVehicle={oneVehicle} setOneVehicle={setOneVehicle} />
+      )}
+
+{assignDriverToVehicle && (
+        <AssignDriverToVehicleDialog open={assignDriverToVehicle} statechanger={setAssignDriverToVehicle} oneVehicle={oneVehicle} setOneVehicle={setOneVehicle} />
+      )}
+
+{unAssignDriverFromVehicle && (
+        <UnassignDriverFromVehicleDialog open={unAssignDriverFromVehicle} statechanger={setUnAssignDriverFromVehicle} oneVehicle={oneVehicle} setOneVehicle={setOneVehicle} />
       )}
     </Grid>
   )
