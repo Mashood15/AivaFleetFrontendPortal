@@ -150,13 +150,13 @@ function AddDriverDrawer({ open, statechanger, oneDriver, setOneDriver }) {
   useEffect(() => {
     if (oneDriverData != null) {
       formik.setValues({
-  "userName": values.userName,
-  "email": values.email,
-  "phoneNumber": values.phoneNumber,
-  "firstName": values.firstName,
-  "lastName": values.lastName,
-  "licenseNumber": values.licenseNumber,
-  "licenseExpiryDate": values.licenseExpiryDate,
+  "userName": oneDriverData.userName,
+  "email": oneDriverData.email,
+  "phoneNumber": oneDriverData.phoneNumber,
+  "firstName": oneDriverData.firstName,
+  "lastName": oneDriverData.lastName,
+  "licenseNumber": oneDriverData.licenseNumber,
+  "licenseExpiryDate": oneDriverData.licenseExpiryDate,
       })
     } else {
       formik.handleReset()
